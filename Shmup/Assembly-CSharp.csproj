@@ -47,6 +47,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bullet.cs" />
+     <Compile Include="Assets\Scripts\EnemyCanDie.cs" />
+     <Compile Include="Assets\Scripts\EnemyMoveCircular.cs" />
+     <Compile Include="Assets\Scripts\EnemyMoveConstant.cs" />
+     <Compile Include="Assets\Scripts\EnemyRotate.cs" />
      <Compile Include="Assets\Scripts\Gun.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
@@ -77,7 +81,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="XInputDotNetPure">
- <HintPath>E:/TOAST-GAMES/Games/Shmup/Assets/XInput/Plugins/x86_64/XInputDotNetPure.dll</HintPath>
+ <HintPath>E:/TOAST-GAMES/Games/Shmup/Unity/Shmup/trunk/Shmup/Assets/XInput/Plugins/x86_64/XInputDotNetPure.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

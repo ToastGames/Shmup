@@ -16,4 +16,14 @@ public class Bullet : MonoBehaviour {
 	{
 		transform.position += transform.forward * moveSpeed;
 	}
+
+	void OnTriggerEnter (Collider other)
+	{
+		if (other.tag == "Enemy")
+		if (other.GetComponent<EnemyCanDie> ().canDie == true)
+		{
+			other.GetComponent<EnemyCanDie> ().canDie = false;
+			other.gameObject.SetActive (false);
+		}
+	}
 }
