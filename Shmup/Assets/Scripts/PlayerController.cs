@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
 	public float rollTime;
 	public float rollAngle;
 	public float axisThreshold = 0.1f;
+	public float rotateSpeed = 5.0f;
+	public float rotateBounds = 5.0f;
 
 	private float timeRolledSoFar = 0.0f;
 	bool isRolling = false;
@@ -55,20 +57,35 @@ public class PlayerController : MonoBehaviour {
 	private void AimPlayer()
 	{
 		float rotateAxisX =	XCI.GetAxis(XboxAxis.RightStickX, controller);
-		float rotateAxisZ =	XCI.GetAxis(XboxAxis.RightStickY, controller);
+		float newLookAtXPos = 0.0f;
 
-		rotateAxisX = Mathf.Clamp (rotateAxisX, -0.5f, 0.5f);		//need to do this a better way, something that is based on angle, not value
+//		float rotateAxisZ =	XCI.GetAxis(XboxAxis.RightStickY, controller);
+//		rotateAxisX = Mathf.Clamp (rotateAxisX, -0.5f, 0.5f);		//need to do this a better way, something that is based on angle, not value
+//		rotateAxisZ = Mathf.Clamp (rotateAxisZ, 0.0f, 1.0f);
+//
+//		Vector3 directionVector = new Vector3 (rotateAxisX,	0, rotateAxisZ);
+//
+//		directionVector = directionVector.normalized;
+//
+//		//Debug.Log (directionVector);
+//		Debug.DrawLine (transform.position, transform.position + directionVector * lookAtLength);
 
-		rotateAxisZ = Mathf.Clamp (rotateAxisZ, 0.0f, 1.0f);
+		if (Mathf.Abs (rotateAxisX) > axisThreshold)
+		{
+			newLookAtXPos = bitToLookAt.transform.position.x + rotateAxisX;
+			if (newLookAtXPos < transform.position.x - rotateBounds)
+				newLookAtXPos = transform.position.x - rotateBounds;
+			if (newLookAtXPos > transform.position.x + rotateBounds)
+				newLookAtXPos = transform.position.x + rotateBounds;
+		}
+		else
+		{
+			newLookAtXPos = bitToLookAt.transform.position.x;
+		}
 
-		Vector3 directionVector = new Vector3 (rotateAxisX,	0, rotateAxisZ);
+		Vector3 newPos = new Vector3 (newLookAtXPos, bitToLookAt.transform.position.y, bitToLookAt.transform.position.z);
 
-		directionVector = directionVector.normalized;
-
-		//Debug.Log (directionVector);
-		Debug.DrawLine (transform.position, transform.position + directionVector * lookAtLength);
-
-		bitToLookAt.transform.position = transform.position + directionVector * lookAtLength;
+		bitToLookAt.transform.position = newPos;
 		bitToYaw.transform.LookAt (bitToLookAt.transform.position);
 	}
 }
